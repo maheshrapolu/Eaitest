@@ -1,0 +1,28 @@
+<p-table [value]="values" #dt [globalFilterFields]="['title']" >
+    <!-- Search filter -->
+    <ng-template pTemplate="caption" class="fas">
+        <div style="text-align: right">
+            <input type="text" pInputText size="50" placeholder="Search Filter"
+                (input)="dt.filterGlobal($event.target.value, 'contains')" style="height:30px">
+        </div>
+    </ng-template>
+    <!-- Table Data Result -->
+    <ng-template pTemplate="header">
+        <tr >
+            <th style="color: blue">Vin</th>
+            <th style="color: red">Year</th>
+            <th style="color: green">Brand</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-value >
+        <tr (click)="showrowdata(value)" style="color:rgb(36, 12, 250)">
+            <td>{{value.id}}</td>
+            <td>{{value.userId}}</td>
+            <td>{{value.title}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+<!-- model popup Show -->
+<p-dialog header="Model Popup Row Details" [(visible)]="display" [modal]="true" [dismissableMask]="true"   >
+    <p style="color:red">{{rowdata}}</p>
+</p-dialog>
